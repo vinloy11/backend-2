@@ -20,11 +20,10 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    public function ownsTopic(Topic $topic) {
+        return $this->id === $topic->user->id;
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

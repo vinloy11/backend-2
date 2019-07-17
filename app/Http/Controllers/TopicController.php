@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
+use App\Http\Requests\TopicStoreRequest;
+use App\Http\Requests\UpdateTopicRequest;
 use App\Post;
 use App\Topic;
 use App\Http\Resources\Topic as TopicResource;
-use App\Http\Requests\TopicStoreRequest;
 
 class TopicController extends Controller
 {
@@ -31,6 +32,14 @@ class TopicController extends Controller
     }
 
     public function show(Topic $topic) {
+        return new TopicResource($topic);
+    }
+
+    public function update(UpdateTopicRequest $request, Topic $topic) {
+
+        $this->authorize('update', $topic);
+        $topic->title = $request->get('title', $topic->title);
+        $topic->save();
         return new TopicResource($topic);
     }
 
