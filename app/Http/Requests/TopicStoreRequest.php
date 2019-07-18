@@ -25,7 +25,7 @@ class TopicStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'body' => 'required|max:200'
+            'body' => 'required|max:2000'
         ];
     }
 }
